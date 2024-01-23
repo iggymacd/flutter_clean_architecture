@@ -5,9 +5,15 @@ import 'package:clean_architecture_template/utilities/error/failures.dart';
 import 'package:clean_architecture_template/utilities/network_info.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mockito/mockito.dart';
+import 'package:test/test.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+// import 'package:mockito/mockito.dart';
+import 'package:mockito/annotations.dart';
+
+@GenerateNiceMocks([MockSpec<Repository<Todo>>(), MockSpec<NetworkInfo>()])
+import 'remote_first_repository_test.mocks.dart';
 
 class Todo extends Equatable implements Identifiable {
   final String note;
@@ -16,27 +22,27 @@ class Todo extends Equatable implements Identifiable {
   final String id;
 
   const Todo({
-    @required this.note,
-    @required this.id,
+    required this.note,
+    required this.id,
   });
 
   @override
   List<Object> get props => [note, id];
 }
 
-class MockRemoteRepository extends Mock implements Repository<Todo> {}
+// class MockRemoteRepository extends Mock implements Repository<Todo> {}
 
-class MockLocalRepository extends Mock implements Repository<Todo> {}
+// class MockLocalRepository extends Mock implements Repository<Todo> {}
 
-class MockNetworkInfo extends Mock implements NetworkInfo {}
+// class MockNetworkInfo extends Mock implements NetworkInfo {}
 
 void main() {
-  RemoteFirstRepository sut;
-  MockRemoteRepository mockRemoteRepository;
-  MockLocalRepository mockLocalRepository;
-  MockNetworkInfo mockNetworkChecker;
+  late RemoteFirstRepository sut;
+  late MockRepository mockRemoteRepository;
+  late MockRepository mockLocalRepository;
+  late MockNetworkInfo mockNetworkChecker;
 
-  final listEquality = const ListEquality().equals;
+  // final listEquality = const ListEquality().equals;
   const tEntity = Todo(id: '0', note: '');
   final tUniqueId = UniqueId('');
   final tEntities = [
@@ -47,8 +53,8 @@ void main() {
   const void unit = null;
 
   setUp(() {
-    mockRemoteRepository = MockRemoteRepository();
-    mockLocalRepository = MockLocalRepository();
+    mockRemoteRepository = MockRepository();
+    mockLocalRepository = MockRepository();
     mockNetworkChecker = MockNetworkInfo();
 
     sut = RemoteFirstRepository(
@@ -61,6 +67,7 @@ void main() {
   group('Device is online', () {
     setUp(() {
       when(mockNetworkChecker.isConnected).thenAnswer((_) async => true);
+      // when(mockNetworkChecker.isConnected).thenAnswer((_) async => true);
     });
     group('add operation', () {
       test('fails when remote repository fails', () async {
@@ -145,7 +152,8 @@ void main() {
         final entities = result.fold((_) => [], (v) => v);
 
         assert(result.isRight());
-        assert(listEquality(entities, tEntities));
+        assert(listEquals(entities, tEntities));
+        // assert(listEquality(entities, tEntities));
         verify(mockRemoteRepository.getAll());
         verify(mockLocalRepository.getAll());
       });

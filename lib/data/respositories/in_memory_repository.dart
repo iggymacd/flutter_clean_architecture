@@ -37,7 +37,7 @@ class InMemoryRepository<E extends Identifiable> implements Repository<E> {
   @override
   Future<Either<Failure, E>> getById(UniqueId id) {
     final entity = entitySet[id.value];
-    return Future.value(Right(entity));
+    return Future.value(Right(entity!));
   }
 
   @override

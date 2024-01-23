@@ -18,9 +18,9 @@ class RemoteFirstRepository<Entity extends Identifiable>
   final NetworkInfo networkChecker;
 
   RemoteFirstRepository({
-    @required this.networkChecker,
-    @required this.remoteRepository,
-    @required this.cacheRepository,
+    required this.networkChecker,
+    required this.remoteRepository,
+    required this.cacheRepository,
   });
 
   /// Adds new entity
