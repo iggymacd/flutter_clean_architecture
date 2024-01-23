@@ -25,8 +25,12 @@ This project currently run on version : `Flutter 1.12.13+hotfix.8 • channel st
 
 ## Development
 
-Setup githooks by doing the following (modified script for powershell on windows)
-
+Setup githooks by doing the following (modified script for powershell on windows). 
+```
+Write-Host "\e[33;1m%s\e[0m\n" 'Running unit tests'
+flutter test
+```
+ran this command
 ```
  git config core.hooksPath .githooks
 ```
