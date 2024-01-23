@@ -27,6 +27,11 @@ This project currently run on version : `Flutter 1.12.13+hotfix.8 • channel st
 
 Setup githooks by doing the following (modified script for powershell on windows). 
 ```
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+```
+
+
+```
 Write-Host "\e[33;1m%s\e[0m\n" 'Running unit tests'
 flutter test
 ```
@@ -34,6 +39,10 @@ ran this command
 ```
  git config core.hooksPath .githooks
 ```
+```
+Set-ExecutionPolicy -ExecutionPolicy Default -Scope Process
+```
+
 
 This will ensure that for instance tests are run before pushing etc...
 
