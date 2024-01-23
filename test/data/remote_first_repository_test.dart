@@ -15,6 +15,7 @@ import 'package:mockito/annotations.dart';
 @GenerateNiceMocks([MockSpec<Repository<Todo>>(), MockSpec<NetworkInfo>()])
 import 'remote_first_repository_test.mocks.dart';
 
+/// Temporary class for test
 class Todo extends Equatable implements Identifiable {
   final String note;
 
