@@ -25,7 +25,7 @@ This project currently run on version : `Flutter 1.12.13+hotfix.8 • channel st
 
 ## Development
 
-Setup githooks by doing
+Setup githooks by doing the following (modified script for powershell on windows)
 
 ```
  git config core.hooksPath .githooks
