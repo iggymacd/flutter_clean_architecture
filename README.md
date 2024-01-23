@@ -37,7 +37,7 @@ This project uses code generation for generating entities and some bloc state an
 making changes to those files be sure to run:
 
 ```
-flutter packages pub run build_runner watch
+dart run build_runner watch (updated since flutter run build_runner is deprecated)
 ```
 
 **VSCode Configuration**
